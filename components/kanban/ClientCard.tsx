@@ -7,7 +7,7 @@
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { GripVertical, Mail, Phone, Building2, Trash2, Pencil, Clock } from 'lucide-react'
+import { Mail, Phone, Building2, Trash2, Pencil, Clock } from 'lucide-react'
 import { Client } from '@/types/client'
 
 interface ClientCardProps {
@@ -46,17 +46,11 @@ export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
     <div
       ref={setNodeRef}
       style={style}
-      className="bg-white rounded-md border border-gray-200 p-3 shadow-sm hover:shadow-md transition-all hover:border-pink-400 hover:ring-1 hover:ring-pink-200 group"
+      {...attributes}
+      {...listeners}
+      className="bg-white rounded-md border border-gray-200 p-3 shadow-sm hover:shadow-md transition-all hover:border-pink-400 hover:ring-1 hover:ring-pink-200 group cursor-grab active:cursor-grabbing"
     >
       <div className="flex items-start gap-2">
-        <button
-          {...attributes}
-          {...listeners}
-          className="cursor-grab active:cursor-grabbing mt-0.5 text-gray-300 hover:text-gray-500 transition-colors flex-shrink-0"
-        >
-          <GripVertical className="w-3.5 h-3.5" />
-        </button>
-        
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-sm text-gray-900 truncate leading-tight">
             {client.name || 'Sem nome'}
@@ -99,8 +93,11 @@ export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
         <div className="flex flex-col gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
           {onEdit && (
             <button
-              onClick={() => onEdit(client)}
-              className="p-1 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors"
+              onClick={(e) => {
+                e.stopPropagation()
+                onEdit(client)
+              }}
+              className="p-1 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors cursor-pointer"
               title="Editar"
             >
               <Pencil className="w-3 h-3" />
@@ -108,8 +105,11 @@ export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
           )}
           {onDelete && (
             <button
-              onClick={() => onDelete(String(client.id))}
-              className="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
+              onClick={(e) => {
+                e.stopPropagation()
+                onDelete(String(client.id))
+              }}
+              className="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors cursor-pointer"
               title="Deletar"
             >
               <Trash2 className="w-3 h-3" />
