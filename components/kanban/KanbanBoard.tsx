@@ -24,6 +24,7 @@ import {
   CLIENT_STATUS_LABELS,
   CLIENT_STATUS_COLORS,
 } from '@/types/client'
+import { supabase } from '@/lib/supabase'
 
 const STATUSES: ClientStatus[] = [
   'NOVO',
@@ -51,6 +52,41 @@ export function KanbanBoard() {
 
   useEffect(() => {
     fetchClients()
+
+    // Configurar Supabase Realtime para atualização automática
+    const channel = supabase
+      .channel('clients-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'clients',
+        },
+        (payload) => {
+          console.log('Mudança detectada:', payload)
+
+          if (payload.eventType === 'INSERT') {
+            setClients((prev) => [...prev, payload.new as Client])
+          } else if (payload.eventType === 'UPDATE') {
+            setClients((prev) =>
+              prev.map((c) =>
+                c.id === (payload.new as Client).id ? (payload.new as Client) : c
+              )
+            )
+          } else if (payload.eventType === 'DELETE') {
+            setClients((prev) =>
+              prev.filter((c) => c.id !== (payload.old as Client).id)
+            )
+          }
+        }
+      )
+      .subscribe()
+
+    // Cleanup: desinscrever ao desmontar componente
+    return () => {
+      supabase.removeChannel(channel)
+    }
   }, [])
 
   const fetchClients = async () => {
