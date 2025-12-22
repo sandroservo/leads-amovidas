@@ -1,0 +1,447 @@
+2025-Dec-22 01:25:18.768205 Starting deployment of sandroservo/leads-amovidas:main to localhost.
+2025-Dec-22 01:25:19.011513 Preparing container with helper image: ghcr.io/coollabsio/coolify-helper:1.0.12
+2025-Dec-22 01:25:19.135603 [CMD]: docker stop -t 30 mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:25:19.135603 Error response from daemon: No such container: mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:25:19.253180 [CMD]: docker rm -f mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:25:19.253180 Error response from daemon: No such container: mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:25:19.428594 [CMD]: docker run -d --network coolify --name mwokwkcs4kwc4wcsk488gso8 --rm -v /var/run/docker.sock:/var/run/docker.sock ghcr.io/coollabsio/coolify-helper:1.0.12
+2025-Dec-22 01:25:19.428594 2787895cedfd95dea9d670d4bee8ff001f6841c4a710ec7608b7829b6cedda69
+2025-Dec-22 01:25:20.478676 [CMD]: docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'GIT_SSH_COMMAND="ssh -o ConnectTimeout=30 -p 22 -o Port=22 -o LogLevel=ERROR -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" git ls-remote https://github.com/sandroservo/leads-amovidas refs/heads/main'
+2025-Dec-22 01:25:20.478676 9099dcd7fef4d5ba4eac11c2e99ce19cb35e9261 refs/heads/main
+2025-Dec-22 01:25:20.664920 Image not found (xsw0wc0ko8k040080sokwss8:9099dcd7fef4d5ba4eac11c2e99ce19cb35e9261). Building new image.
+2025-Dec-22 01:25:20.670934 ----------------------------------------
+2025-Dec-22 01:25:20.675967 Importing sandroservo/leads-amovidas:main (commit sha 9099dcd7fef4d5ba4eac11c2e99ce19cb35e9261) to /artifacts/mwokwkcs4kwc4wcsk488gso8.
+2025-Dec-22 01:25:20.932119 [CMD]: docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'git clone --depth=1 --recurse-submodules --shallow-submodules -b 'main' 'https://github.com/sandroservo/leads-amovidas' '/artifacts/mwokwkcs4kwc4wcsk488gso8' && cd '/artifacts/mwokwkcs4kwc4wcsk488gso8' && if [ -f .gitmodules ]; then sed -i "s#git@\(.*\):#https://\1/#g" '/artifacts/mwokwkcs4kwc4wcsk488gso8'/.gitmodules || true && git submodule sync && GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" git submodule update --init --recursive --depth=1; fi && cd '/artifacts/mwokwkcs4kwc4wcsk488gso8' && GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" git lfs pull'
+2025-Dec-22 01:25:20.932119 Cloning into '/artifacts/mwokwkcs4kwc4wcsk488gso8'...
+2025-Dec-22 01:25:21.972467 [CMD]: docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'cd /artifacts/mwokwkcs4kwc4wcsk488gso8 && git log -1 9099dcd7fef4d5ba4eac11c2e99ce19cb35e9261 --pretty=%B'
+2025-Dec-22 01:25:21.972467 fix: remover dependências do Prisma não utilizadas
+2025-Dec-22 01:25:21.972467
+2025-Dec-22 01:25:21.972467 O projeto usa Supabase Client, não Prisma.
+2025-Dec-22 01:25:21.972467 Prisma 7.2.0 exige Node 22.12+ mas Coolify usa 22.11.0
+2025-Dec-22 01:25:21.972467 causando falha no build.
+2025-Dec-22 01:25:22.171230 Generating nixpacks configuration with: nixpacks plan -f json --env NIXPACKS_NODE_VERSION=22 --env COOLIFY_URL=https://leads.amovidas.com.br --env COOLIFY_FQDN=leads.amovidas.com.br --env COOLIFY_BRANCH=main --env COOLIFY_RESOURCE_UUID=xsw0wc0ko8k040080sokwss8 /artifacts/mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:25:22.449193 [CMD]: docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'nixpacks plan -f json --env NIXPACKS_NODE_VERSION=22 --env COOLIFY_URL=https://leads.amovidas.com.br --env COOLIFY_FQDN=leads.amovidas.com.br --env COOLIFY_BRANCH=main --env COOLIFY_RESOURCE_UUID=xsw0wc0ko8k040080sokwss8 /artifacts/mwokwkcs4kwc4wcsk488gso8'
+2025-Dec-22 01:25:22.449193 {
+2025-Dec-22 01:25:22.449193 "providers": [],
+2025-Dec-22 01:25:22.449193 "buildImage": "ghcr.io/railwayapp/nixpacks:ubuntu-1745885067",
+2025-Dec-22 01:25:22.449193 "variables": {
+2025-Dec-22 01:25:22.449193 "CI": "true",
+2025-Dec-22 01:25:22.449193 "COOLIFY_BRANCH": "main",
+2025-Dec-22 01:25:22.449193 "COOLIFY_FQDN": "leads.amovidas.com.br",
+2025-Dec-22 01:25:22.449193 "COOLIFY_RESOURCE_UUID": "xsw0wc0ko8k040080sokwss8",
+2025-Dec-22 01:25:22.449193 "COOLIFY_URL": "https://leads.amovidas.com.br",
+2025-Dec-22 01:25:22.449193 "NIXPACKS_METADATA": "node",
+2025-Dec-22 01:25:22.449193 "NIXPACKS_NODE_VERSION": "22",
+2025-Dec-22 01:25:22.449193 "NODE_ENV": "production",
+2025-Dec-22 01:25:22.449193 "NPM_CONFIG_PRODUCTION": "false"
+2025-Dec-22 01:25:22.449193 },
+2025-Dec-22 01:25:22.449193 "phases": {
+2025-Dec-22 01:25:22.449193 "build": {
+2025-Dec-22 01:25:22.449193 "dependsOn": [
+2025-Dec-22 01:25:22.449193 "install"
+2025-Dec-22 01:25:22.449193 ],
+2025-Dec-22 01:25:22.449193 "cmds": [
+2025-Dec-22 01:25:22.449193 "npm run build"
+2025-Dec-22 01:25:22.449193 ],
+2025-Dec-22 01:25:22.449193 "cacheDirectories": [
+2025-Dec-22 01:25:22.449193 ".next/cache",
+2025-Dec-22 01:25:22.449193 "node_modules/.cache"
+2025-Dec-22 01:25:22.449193 ]
+2025-Dec-22 01:25:22.449193 },
+2025-Dec-22 01:25:22.449193 "install": {
+2025-Dec-22 01:25:22.449193 "dependsOn": [
+2025-Dec-22 01:25:22.449193 "setup"
+2025-Dec-22 01:25:22.449193 ],
+2025-Dec-22 01:25:22.449193 "cmds": [
+2025-Dec-22 01:25:22.449193 "npm ci"
+2025-Dec-22 01:25:22.449193 ],
+2025-Dec-22 01:25:22.449193 "cacheDirectories": [
+2025-Dec-22 01:25:22.449193 "/root/.npm"
+2025-Dec-22 01:25:22.449193 ],
+2025-Dec-22 01:25:22.449193 "paths": [
+2025-Dec-22 01:25:22.449193 "/app/node_modules/.bin"
+2025-Dec-22 01:25:22.449193 ]
+2025-Dec-22 01:25:22.449193 },
+2025-Dec-22 01:25:22.449193 "setup": {
+2025-Dec-22 01:25:22.449193 "nixPkgs": [
+2025-Dec-22 01:25:22.449193 "nodejs_22",
+2025-Dec-22 01:25:22.449193 "npm-9_x",
+2025-Dec-22 01:25:22.449193 "openssl"
+2025-Dec-22 01:25:22.449193 ],
+2025-Dec-22 01:25:22.449193 "nixLibs": [
+2025-Dec-22 01:25:22.449193 "gcc-unwrapped"
+2025-Dec-22 01:25:22.449193 ],
+2025-Dec-22 01:25:22.449193 "nixOverlays": [
+2025-Dec-22 01:25:22.449193 "https://github.com/railwayapp/nix-npm-overlay/archive/main.tar.gz"
+2025-Dec-22 01:25:22.449193 ],
+2025-Dec-22 01:25:22.449193 "nixpkgsArchive": "ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7"
+2025-Dec-22 01:25:22.449193 }
+2025-Dec-22 01:25:22.449193 },
+2025-Dec-22 01:25:22.449193 "start": {
+2025-Dec-22 01:25:22.449193 "cmd": "npm run start"
+2025-Dec-22 01:25:22.449193 }
+2025-Dec-22 01:25:22.449193 }
+2025-Dec-22 01:25:22.668869 [CMD]: docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'nixpacks detect /artifacts/mwokwkcs4kwc4wcsk488gso8'
+2025-Dec-22 01:25:22.668869 node
+2025-Dec-22 01:25:22.679769 Found application type: node.
+2025-Dec-22 01:25:22.685927 If you need further customization, please check the documentation of Nixpacks: https://nixpacks.com/docs/providers/node
+2025-Dec-22 01:25:22.697541 Final Nixpacks plan: {
+2025-Dec-22 01:25:22.697541 "providers": [],
+2025-Dec-22 01:25:22.697541 "buildImage": "ghcr.io\/railwayapp\/nixpacks:ubuntu-1745885067",
+2025-Dec-22 01:25:22.697541 "variables": {
+2025-Dec-22 01:25:22.697541 "CI": "true",
+2025-Dec-22 01:25:22.697541 "COOLIFY_BRANCH": "main",
+2025-Dec-22 01:25:22.697541 "COOLIFY_FQDN": "leads.amovidas.com.br",
+2025-Dec-22 01:25:22.697541 "COOLIFY_RESOURCE_UUID": "xsw0wc0ko8k040080sokwss8",
+2025-Dec-22 01:25:22.697541 "COOLIFY_URL": "https:\/\/leads.amovidas.com.br",
+2025-Dec-22 01:25:22.697541 "NIXPACKS_METADATA": "node",
+2025-Dec-22 01:25:22.697541 "NIXPACKS_NODE_VERSION": "22",
+2025-Dec-22 01:25:22.697541 "NODE_ENV": "production",
+2025-Dec-22 01:25:22.697541 "NPM_CONFIG_PRODUCTION": "false",
+2025-Dec-22 01:25:22.697541 "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc2NTQyMjYwMCwiZXhwIjo0OTIxMDk2MjAwLCJyb2xlIjoiYW5vbiJ9.knBb11axSAbaHnhvl864G7jCjF6AWMvuUey2tsfo5ck",
+2025-Dec-22 01:25:22.697541 "NEXT_PUBLIC_SUPABASE_URL": "https:\/\/supabase.amovidas.com.br"
+2025-Dec-22 01:25:22.697541 },
+2025-Dec-22 01:25:22.697541 "phases": {
+2025-Dec-22 01:25:22.697541 "build": {
+2025-Dec-22 01:25:22.697541 "dependsOn": [
+2025-Dec-22 01:25:22.697541 "install"
+2025-Dec-22 01:25:22.697541 ],
+2025-Dec-22 01:25:22.697541 "cmds": [
+2025-Dec-22 01:25:22.697541 "npm run build"
+2025-Dec-22 01:25:22.697541 ],
+2025-Dec-22 01:25:22.697541 "cacheDirectories": [
+2025-Dec-22 01:25:22.697541 ".next\/cache",
+2025-Dec-22 01:25:22.697541 "node_modules\/.cache"
+2025-Dec-22 01:25:22.697541 ]
+2025-Dec-22 01:25:22.697541 },
+2025-Dec-22 01:25:22.697541 "install": {
+2025-Dec-22 01:25:22.697541 "dependsOn": [
+2025-Dec-22 01:25:22.697541 "setup"
+2025-Dec-22 01:25:22.697541 ],
+2025-Dec-22 01:25:22.697541 "cmds": [
+2025-Dec-22 01:25:22.697541 "npm ci"
+2025-Dec-22 01:25:22.697541 ],
+2025-Dec-22 01:25:22.697541 "cacheDirectories": [
+2025-Dec-22 01:25:22.697541 "\/root\/.npm"
+2025-Dec-22 01:25:22.697541 ],
+2025-Dec-22 01:25:22.697541 "paths": [
+2025-Dec-22 01:25:22.697541 "\/app\/node_modules\/.bin"
+2025-Dec-22 01:25:22.697541 ]
+2025-Dec-22 01:25:22.697541 },
+2025-Dec-22 01:25:22.697541 "setup": {
+2025-Dec-22 01:25:22.697541 "nixPkgs": [
+2025-Dec-22 01:25:22.697541 "nodejs_22",
+2025-Dec-22 01:25:22.697541 "npm-9_x",
+2025-Dec-22 01:25:22.697541 "openssl"
+2025-Dec-22 01:25:22.697541 ],
+2025-Dec-22 01:25:22.697541 "nixLibs": [
+2025-Dec-22 01:25:22.697541 "gcc-unwrapped"
+2025-Dec-22 01:25:22.697541 ],
+2025-Dec-22 01:25:22.697541 "nixOverlays": [
+2025-Dec-22 01:25:22.697541 "https:\/\/github.com\/railwayapp\/nix-npm-overlay\/archive\/main.tar.gz"
+2025-Dec-22 01:25:22.697541 ],
+2025-Dec-22 01:25:22.697541 "nixpkgsArchive": "ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7",
+2025-Dec-22 01:25:22.697541 "aptPkgs": [
+2025-Dec-22 01:25:22.697541 "curl",
+2025-Dec-22 01:25:22.697541 "wget"
+2025-Dec-22 01:25:22.697541 ]
+2025-Dec-22 01:25:22.697541 }
+2025-Dec-22 01:25:22.697541 },
+2025-Dec-22 01:25:22.697541 "start": {
+2025-Dec-22 01:25:22.697541 "cmd": "npm run start"
+2025-Dec-22 01:25:22.697541 }
+2025-Dec-22 01:25:22.697541 }
+2025-Dec-22 01:25:23.222488 Creating build-time .env file in /artifacts (outside Docker context).
+2025-Dec-22 01:25:23.583873 [CMD]: docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'cat /artifacts/build-time.env'
+2025-Dec-22 01:25:23.583873 CI='true'
+2025-Dec-22 01:25:23.583873 NIXPACKS_METADATA='node'
+2025-Dec-22 01:25:23.583873 NIXPACKS_NODE_VERSION="22"
+2025-Dec-22 01:25:23.583873 NODE_ENV='production'
+2025-Dec-22 01:25:23.583873 NPM_CONFIG_PRODUCTION='false'
+2025-Dec-22 01:25:23.583873 NEXT_PUBLIC_SUPABASE_ANON_KEY="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc2NTQyMjYwMCwiZXhwIjo0OTIxMDk2MjAwLCJyb2xlIjoiYW5vbiJ9.knBb11axSAbaHnhvl864G7jCjF6AWMvuUey2tsfo5ck"
+2025-Dec-22 01:25:23.583873 NEXT_PUBLIC_SUPABASE_URL="https://supabase.amovidas.com.br"
+2025-Dec-22 01:25:23.583873 COOLIFY_URL='https://leads.amovidas.com.br'
+2025-Dec-22 01:25:23.583873 COOLIFY_FQDN='leads.amovidas.com.br'
+2025-Dec-22 01:25:23.583873 COOLIFY_BRANCH='main'
+2025-Dec-22 01:25:23.583873 COOLIFY_RESOURCE_UUID='xsw0wc0ko8k040080sokwss8'
+2025-Dec-22 01:25:23.597051 ----------------------------------------
+2025-Dec-22 01:25:23.603215 Building docker image started.
+2025-Dec-22 01:25:23.608712 To check the current progress, click on Show Debug Logs.
+2025-Dec-22 01:25:24.021848 [CMD]: docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'nixpacks build -c /artifacts/thegameplan.json --cache-key 'xsw0wc0ko8k040080sokwss8' --no-error-without-start -n xsw0wc0ko8k040080sokwss8:9099dcd7fef4d5ba4eac11c2e99ce19cb35e9261 /artifacts/mwokwkcs4kwc4wcsk488gso8 -o /artifacts/mwokwkcs4kwc4wcsk488gso8'
+2025-Dec-22 01:25:24.021848
+2025-Dec-22 01:25:24.021848 ╔══════════════════ Nixpacks v1.41.0 ══════════════════╗
+2025-Dec-22 01:25:24.021848 ║ setup │ nodejs_22, npm-9_x, openssl, curl, wget ║
+2025-Dec-22 01:25:24.021848 ║──────────────────────────────────────────────────────║
+2025-Dec-22 01:25:24.021848 ║ install │ npm ci ║
+2025-Dec-22 01:25:24.021848 ║──────────────────────────────────────────────────────║
+2025-Dec-22 01:25:24.021848 ║ build │ npm run build ║
+2025-Dec-22 01:25:24.021848 ║──────────────────────────────────────────────────────║
+2025-Dec-22 01:25:24.021848 ║ start │ npm run start ║
+2025-Dec-22 01:25:24.021848 ╚══════════════════════════════════════════════════════╝
+2025-Dec-22 01:25:24.021848
+2025-Dec-22 01:25:24.021848
+2025-Dec-22 01:25:24.021848 Saved output to:
+2025-Dec-22 01:25:24.033392 /artifacts/mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:25:24.202333 [CMD]: docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'cat /artifacts/mwokwkcs4kwc4wcsk488gso8/.nixpacks/Dockerfile'
+2025-Dec-22 01:25:24.202333 FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333 ENTRYPOINT ["/bin/bash", "-l", "-c"]
+2025-Dec-22 01:25:24.202333 WORKDIR /app/
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333 COPY .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix
+2025-Dec-22 01:25:24.202333 RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d
+2025-Dec-22 01:25:24.202333 RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends curl wget
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333 ARG CI COOLIFY_BRANCH COOLIFY_FQDN COOLIFY_RESOURCE_UUID COOLIFY_URL NEXT_PUBLIC_SUPABASE_ANON_KEY NEXT_PUBLIC_SUPABASE_URL NIXPACKS_METADATA NIXPACKS_NODE_VERSION NODE_ENV NPM_CONFIG_PRODUCTION
+2025-Dec-22 01:25:24.202333 ENV CI=$CI COOLIFY_BRANCH=$COOLIFY_BRANCH COOLIFY_FQDN=$COOLIFY_FQDN COOLIFY_RESOURCE_UUID=$COOLIFY_RESOURCE_UUID COOLIFY_URL=$COOLIFY_URL NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL NIXPACKS_METADATA=$NIXPACKS_METADATA NIXPACKS_NODE_VERSION=$NIXPACKS_NODE_VERSION NODE_ENV=$NODE_ENV NPM_CONFIG_PRODUCTION=$NPM_CONFIG_PRODUCTION
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333 # setup phase
+2025-Dec-22 01:25:24.202333 # noop
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333 # install phase
+2025-Dec-22 01:25:24.202333 ENV NIXPACKS_PATH=/app/node_modules/.bin:$NIXPACKS_PATH
+2025-Dec-22 01:25:24.202333 COPY . /app/.
+2025-Dec-22 01:25:24.202333 RUN --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-/root/npm,target=/root/.npm npm ci
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333 # build phase
+2025-Dec-22 01:25:24.202333 COPY . /app/.
+2025-Dec-22 01:25:24.202333 RUN --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-next/cache,target=/app/.next/cache --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-node_modules/cache,target=/app/node_modules/.cache npm run build
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333 RUN printf '\nPATH=/app/node_modules/.bin:$PATH' >> /root/.profile
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333 # start
+2025-Dec-22 01:25:24.202333 COPY . /app
+2025-Dec-22 01:25:24.202333
+2025-Dec-22 01:25:24.202333 CMD ["npm run start"]
+2025-Dec-22 01:25:24.552536 [CMD]: docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'cat /artifacts/build.sh'
+2025-Dec-22 01:25:24.552536 cd /artifacts/mwokwkcs4kwc4wcsk488gso8 && set -a && source /artifacts/build-time.env && set +a && docker build --add-host coolify:10.0.1.5 --add-host coolify-db:10.0.1.4 --add-host coolify-realtime:10.0.1.2 --add-host coolify-redis:10.0.1.3 --network host -f /artifacts/mwokwkcs4kwc4wcsk488gso8/.nixpacks/Dockerfile --progress plain -t xsw0wc0ko8k040080sokwss8:9099dcd7fef4d5ba4eac11c2e99ce19cb35e9261 --build-arg CI --build-arg COOLIFY_BRANCH --build-arg COOLIFY_FQDN --build-arg COOLIFY_RESOURCE_UUID --build-arg COOLIFY_URL --build-arg NIXPACKS_METADATA --build-arg NIXPACKS_NODE_VERSION --build-arg NODE_ENV --build-arg NPM_CONFIG_PRODUCTION --build-arg NEXT_PUBLIC_SUPABASE_ANON_KEY --build-arg NEXT_PUBLIC_SUPABASE_URL --build-arg COOLIFY_BUILD_SECRETS_HASH=267d3f732634431f6bd8ecdd02227aa95a885a148243e9221c7499841e98a93c --build-arg 'COOLIFY_URL' --build-arg 'COOLIFY_FQDN' --build-arg 'COOLIFY_BRANCH' --build-arg 'COOLIFY_RESOURCE_UUID' /artifacts/mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:25:25.137495 [CMD]: docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'bash /artifacts/build.sh'
+2025-Dec-22 01:25:25.137495 #0 building with "default" instance using docker driver
+2025-Dec-22 01:25:25.137495
+2025-Dec-22 01:25:25.137495 #1 [internal] load build definition from Dockerfile
+2025-Dec-22 01:25:25.137495 #1 transferring dockerfile: 1.59kB done
+2025-Dec-22 01:25:25.137495 #1 DONE 0.0s
+2025-Dec-22 01:25:25.137495
+2025-Dec-22 01:25:25.137495 #2 [internal] load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+2025-Dec-22 01:25:25.305232 #2 DONE 0.3s
+2025-Dec-22 01:25:25.408136 #3 [internal] load .dockerignore
+2025-Dec-22 01:25:25.408136 #3 transferring context: 683B done
+2025-Dec-22 01:25:25.408136 #3 DONE 0.0s
+2025-Dec-22 01:25:25.408136
+2025-Dec-22 01:25:25.408136 #4 [stage-0 1/11] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+2025-Dec-22 01:25:25.408136 #4 DONE 0.0s
+2025-Dec-22 01:25:25.408136
+2025-Dec-22 01:25:25.408136 #5 [internal] load build context
+2025-Dec-22 01:25:25.408136 #5 transferring context: 396.28kB 0.0s done
+2025-Dec-22 01:25:25.408136 #5 DONE 0.1s
+2025-Dec-22 01:25:25.607532 #6 [stage-0 2/11] WORKDIR /app/
+2025-Dec-22 01:25:25.607532 #6 CACHED
+2025-Dec-22 01:25:25.607532
+2025-Dec-22 01:25:25.607532 #7 [stage-0 3/11] COPY .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix
+2025-Dec-22 01:25:25.607532 #7 CACHED
+2025-Dec-22 01:25:25.607532
+2025-Dec-22 01:25:25.607532 #8 [stage-0 4/11] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d
+2025-Dec-22 01:25:25.607532 #8 CACHED
+2025-Dec-22 01:25:25.607532
+2025-Dec-22 01:25:25.607532 #9 [stage-0 5/11] RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends curl wget
+2025-Dec-22 01:25:25.607532 #9 CACHED
+2025-Dec-22 01:25:25.607532
+2025-Dec-22 01:25:25.607532 #10 [stage-0 6/11] COPY . /app/.
+2025-Dec-22 01:25:25.607532 #10 DONE 0.0s
+2025-Dec-22 01:25:25.607532
+2025-Dec-22 01:25:25.607532 #11 [stage-0 7/11] RUN --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-/root/npm,target=/root/.npm npm ci
+2025-Dec-22 01:25:25.740185 #11 0.284 npm warn config production Use `--omit=dev` instead.
+2025-Dec-22 01:25:41.817582 #11 16.36
+2025-Dec-22 01:25:41.817582 #11 16.36 added 382 packages, and audited 383 packages in 16s
+2025-Dec-22 01:25:41.817582 #11 16.36
+2025-Dec-22 01:25:41.971255 #11 16.36 147 packages are looking for funding
+2025-Dec-22 01:25:41.971255 #11 16.36 run `npm fund` for details
+2025-Dec-22 01:25:41.971255 #11 16.36
+2025-Dec-22 01:25:41.971255 #11 16.36 found 0 vulnerabilities
+2025-Dec-22 01:25:42.438660 #11 DONE 17.0s
+2025-Dec-22 01:25:42.540459 #12 [stage-0 8/11] COPY . /app/.
+2025-Dec-22 01:25:42.540459 #12 DONE 0.1s
+2025-Dec-22 01:25:42.690644 #13 [stage-0 9/11] RUN --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-next/cache,target=/app/.next/cache --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-node_modules/cache,target=/app/node_modules/.cache npm run build
+2025-Dec-22 01:25:42.976270 #13 0.439 npm warn config production Use `--omit=dev` instead.
+2025-Dec-22 01:25:43.167562 #13 0.479
+2025-Dec-22 01:25:43.167562 #13 0.479 > kanban@0.1.0 build
+2025-Dec-22 01:25:43.167562 #13 0.479 > next build
+2025-Dec-22 01:25:43.167562 #13 0.479
+2025-Dec-22 01:25:44.165980 #13 1.628 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2025-Dec-22 01:25:44.165980 #13 1.628 This information is used to shape Next.js' roadmap and prioritize features.
+2025-Dec-22 01:25:44.165980 #13 1.628 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2025-Dec-22 01:25:44.165980 #13 1.628 https://nextjs.org/telemetry
+2025-Dec-22 01:25:44.165980 #13 1.628
+2025-Dec-22 01:25:44.312394 #13 1.655 ▲ Next.js 16.1.0 (Turbopack)
+2025-Dec-22 01:25:44.312394 #13 1.655
+2025-Dec-22 01:25:44.312394 #13 1.660 ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+2025-Dec-22 01:25:44.312394 #13 1.773 Creating an optimized production build ...
+2025-Dec-22 01:26:00.091836 #13 17.55 ✓ Compiled successfully in 15.2s
+2025-Dec-22 01:26:00.256939 #13 17.57 Running TypeScript ...
+2025-Dec-22 01:26:08.458468 #13 25.92 Failed to compile.
+2025-Dec-22 01:26:08.458468 #13 25.92
+2025-Dec-22 01:26:08.458468 #13 25.92 ./prisma.config.ts:4:30
+2025-Dec-22 01:26:08.458468 #13 25.92 Type error: Cannot find module 'prisma/config' or its corresponding type declarations.
+2025-Dec-22 01:26:08.458468 #13 25.92
+2025-Dec-22 01:26:08.458468 #13 25.92 2 | // npm install --save-dev prisma dotenv
+2025-Dec-22 01:26:08.458468 #13 25.92 3 | import "dotenv/config";
+2025-Dec-22 01:26:08.458468 #13 25.92 > 4 | import { defineConfig } from "prisma/config";
+2025-Dec-22 01:26:08.458468 #13 25.92 | ^
+2025-Dec-22 01:26:08.458468 #13 25.92 5 |
+2025-Dec-22 01:26:08.458468 #13 25.92 6 | export default defineConfig({
+2025-Dec-22 01:26:08.458468 #13 25.92 7 | schema: "prisma/schema.prisma",
+2025-Dec-22 01:26:08.698624 #13 26.00 Next.js build worker exited with code: 1 and signal: null
+2025-Dec-22 01:26:08.758947 #13 ERROR: process "/bin/bash -ol pipefail -c npm run build" did not complete successfully: exit code: 1
+2025-Dec-22 01:26:08.803113 ------
+2025-Dec-22 01:26:08.807239 > [stage-0 9/11] RUN --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-next/cache,target=/app/.next/cache --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-node_modules/cache,target=/app/node_modules/.cache npm run build:
+2025-Dec-22 01:26:08.807239 25.92 Type error: Cannot find module 'prisma/config' or its corresponding type declarations.
+2025-Dec-22 01:26:08.807239 25.92
+2025-Dec-22 01:26:08.807239 25.92 2 | // npm install --save-dev prisma dotenv
+2025-Dec-22 01:26:08.807239 25.92 3 | import "dotenv/config";
+2025-Dec-22 01:26:08.807239 25.92 > 4 | import { defineConfig } from "prisma/config";
+2025-Dec-22 01:26:08.807239 25.92 | ^
+2025-Dec-22 01:26:08.807239 25.92 5 |
+2025-Dec-22 01:26:08.807239 25.92 6 | export default defineConfig({
+2025-Dec-22 01:26:08.807239 25.92 7 | schema: "prisma/schema.prisma",
+2025-Dec-22 01:26:08.807239 26.00 Next.js build worker exited with code: 1 and signal: null
+2025-Dec-22 01:26:08.807239 ------
+2025-Dec-22 01:26:08.807239
+2025-Dec-22 01:26:08.807239 1 warning found (use docker --debug to expand):
+2025-Dec-22 01:26:08.807239 - UndefinedVar: Usage of undefined variable '$NIXPACKS_PATH' (line 18)
+2025-Dec-22 01:26:08.819677 Dockerfile:24
+2025-Dec-22 01:26:08.819677 --------------------
+2025-Dec-22 01:26:08.819677 22 | # build phase
+2025-Dec-22 01:26:08.819677 23 | COPY . /app/.
+2025-Dec-22 01:26:08.819677 24 | >>> RUN --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-next/cache,target=/app/.next/cache --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-node_modules/cache,target=/app/node_modules/.cache npm run build
+2025-Dec-22 01:26:08.819677 25 |
+2025-Dec-22 01:26:08.819677 26 |
+2025-Dec-22 01:26:08.819677 --------------------
+2025-Dec-22 01:26:08.819677 ERROR: failed to build: failed to solve: process "/bin/bash -ol pipefail -c npm run build" did not complete successfully: exit code: 1
+2025-Dec-22 01:26:08.840749 exit status 1
+2025-Dec-22 01:26:08.894647 ========================================
+2025-Dec-22 01:26:08.901643 Deployment failed: Command execution failed (exit code 1): docker exec mwokwkcs4kwc4wcsk488gso8 bash -c 'bash /artifacts/build.sh'
+2025-Dec-22 01:26:08.901643 Error: #0 building with "default" instance using docker driver
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #1 [internal] load build definition from Dockerfile
+2025-Dec-22 01:26:08.901643 #1 transferring dockerfile: 1.59kB done
+2025-Dec-22 01:26:08.901643 #1 DONE 0.0s
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #2 [internal] load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+2025-Dec-22 01:26:08.901643 #2 DONE 0.3s
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #3 [internal] load .dockerignore
+2025-Dec-22 01:26:08.901643 #3 transferring context: 683B done
+2025-Dec-22 01:26:08.901643 #3 DONE 0.0s
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #4 [stage-0 1/11] FROM ghcr.io/railwayapp/nixpacks:ubuntu-1745885067@sha256:d45c89d80e13d7ad0fd555b5130f22a866d9dd10e861f589932303ef2314c7de
+2025-Dec-22 01:26:08.901643 #4 DONE 0.0s
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #5 [internal] load build context
+2025-Dec-22 01:26:08.901643 #5 transferring context: 396.28kB 0.0s done
+2025-Dec-22 01:26:08.901643 #5 DONE 0.1s
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #6 [stage-0 2/11] WORKDIR /app/
+2025-Dec-22 01:26:08.901643 #6 CACHED
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #7 [stage-0 3/11] COPY .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix
+2025-Dec-22 01:26:08.901643 #7 CACHED
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #8 [stage-0 4/11] RUN nix-env -if .nixpacks/nixpkgs-ffeebf0acf3ae8b29f8c7049cd911b9636efd7e7.nix && nix-collect-garbage -d
+2025-Dec-22 01:26:08.901643 #8 CACHED
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #9 [stage-0 5/11] RUN sudo apt-get update && sudo apt-get install -y --no-install-recommends curl wget
+2025-Dec-22 01:26:08.901643 #9 CACHED
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #10 [stage-0 6/11] COPY . /app/.
+2025-Dec-22 01:26:08.901643 #10 DONE 0.0s
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #11 [stage-0 7/11] RUN --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-/root/npm,target=/root/.npm npm ci
+2025-Dec-22 01:26:08.901643 #11 0.284 npm warn config production Use `--omit=dev` instead.
+2025-Dec-22 01:26:08.901643 #11 16.36
+2025-Dec-22 01:26:08.901643 #11 16.36 added 382 packages, and audited 383 packages in 16s
+2025-Dec-22 01:26:08.901643 #11 16.36
+2025-Dec-22 01:26:08.901643 #11 16.36 147 packages are looking for funding
+2025-Dec-22 01:26:08.901643 #11 16.36 run `npm fund` for details
+2025-Dec-22 01:26:08.901643 #11 16.36
+2025-Dec-22 01:26:08.901643 #11 16.36 found 0 vulnerabilities
+2025-Dec-22 01:26:08.901643 #11 DONE 17.0s
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #12 [stage-0 8/11] COPY . /app/.
+2025-Dec-22 01:26:08.901643 #12 DONE 0.1s
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 #13 [stage-0 9/11] RUN --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-next/cache,target=/app/.next/cache --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-node_modules/cache,target=/app/node_modules/.cache npm run build
+2025-Dec-22 01:26:08.901643 #13 0.439 npm warn config production Use `--omit=dev` instead.
+2025-Dec-22 01:26:08.901643 #13 0.479
+2025-Dec-22 01:26:08.901643 #13 0.479 > kanban@0.1.0 build
+2025-Dec-22 01:26:08.901643 #13 0.479 > next build
+2025-Dec-22 01:26:08.901643 #13 0.479
+2025-Dec-22 01:26:08.901643 #13 1.628 Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2025-Dec-22 01:26:08.901643 #13 1.628 This information is used to shape Next.js' roadmap and prioritize features.
+2025-Dec-22 01:26:08.901643 #13 1.628 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2025-Dec-22 01:26:08.901643 #13 1.628 https://nextjs.org/telemetry
+2025-Dec-22 01:26:08.901643 #13 1.628
+2025-Dec-22 01:26:08.901643 #13 1.655 ▲ Next.js 16.1.0 (Turbopack)
+2025-Dec-22 01:26:08.901643 #13 1.655
+2025-Dec-22 01:26:08.901643 #13 1.660 ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+2025-Dec-22 01:26:08.901643 #13 1.773 Creating an optimized production build ...
+2025-Dec-22 01:26:08.901643 #13 17.55 ✓ Compiled successfully in 15.2s
+2025-Dec-22 01:26:08.901643 #13 17.57 Running TypeScript ...
+2025-Dec-22 01:26:08.901643 #13 25.92 Failed to compile.
+2025-Dec-22 01:26:08.901643 #13 25.92
+2025-Dec-22 01:26:08.901643 #13 25.92 ./prisma.config.ts:4:30
+2025-Dec-22 01:26:08.901643 #13 25.92 Type error: Cannot find module 'prisma/config' or its corresponding type declarations.
+2025-Dec-22 01:26:08.901643 #13 25.92
+2025-Dec-22 01:26:08.901643 #13 25.92 2 | // npm install --save-dev prisma dotenv
+2025-Dec-22 01:26:08.901643 #13 25.92 3 | import "dotenv/config";
+2025-Dec-22 01:26:08.901643 #13 25.92 > 4 | import { defineConfig } from "prisma/config";
+2025-Dec-22 01:26:08.901643 #13 25.92 | ^
+2025-Dec-22 01:26:08.901643 #13 25.92 5 |
+2025-Dec-22 01:26:08.901643 #13 25.92 6 | export default defineConfig({
+2025-Dec-22 01:26:08.901643 #13 25.92 7 | schema: "prisma/schema.prisma",
+2025-Dec-22 01:26:08.901643 #13 26.00 Next.js build worker exited with code: 1 and signal: null
+2025-Dec-22 01:26:08.901643 #13 ERROR: process "/bin/bash -ol pipefail -c npm run build" did not complete successfully: exit code: 1
+2025-Dec-22 01:26:08.901643 ------
+2025-Dec-22 01:26:08.901643 > [stage-0 9/11] RUN --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-next/cache,target=/app/.next/cache --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-node_modules/cache,target=/app/node_modules/.cache npm run build:
+2025-Dec-22 01:26:08.901643 25.92 Type error: Cannot find module 'prisma/config' or its corresponding type declarations.
+2025-Dec-22 01:26:08.901643 25.92
+2025-Dec-22 01:26:08.901643 25.92 2 | // npm install --save-dev prisma dotenv
+2025-Dec-22 01:26:08.901643 25.92 3 | import "dotenv/config";
+2025-Dec-22 01:26:08.901643 25.92 > 4 | import { defineConfig } from "prisma/config";
+2025-Dec-22 01:26:08.901643 25.92 | ^
+2025-Dec-22 01:26:08.901643 25.92 5 |
+2025-Dec-22 01:26:08.901643 25.92 6 | export default defineConfig({
+2025-Dec-22 01:26:08.901643 25.92 7 | schema: "prisma/schema.prisma",
+2025-Dec-22 01:26:08.901643 26.00 Next.js build worker exited with code: 1 and signal: null
+2025-Dec-22 01:26:08.901643 ------
+2025-Dec-22 01:26:08.901643
+2025-Dec-22 01:26:08.901643 1 warning found (use docker --debug to expand):
+2025-Dec-22 01:26:08.901643 - UndefinedVar: Usage of undefined variable '$NIXPACKS_PATH' (line 18)
+2025-Dec-22 01:26:08.901643 Dockerfile:24
+2025-Dec-22 01:26:08.901643 --------------------
+2025-Dec-22 01:26:08.901643 22 | # build phase
+2025-Dec-22 01:26:08.901643 23 | COPY . /app/.
+2025-Dec-22 01:26:08.901643 24 | >>> RUN --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-next/cache,target=/app/.next/cache --mount=type=cache,id=xsw0wc0ko8k040080sokwss8-node_modules/cache,target=/app/node_modules/.cache npm run build
+2025-Dec-22 01:26:08.901643 25 |
+2025-Dec-22 01:26:08.901643 26 |
+2025-Dec-22 01:26:08.901643 --------------------
+2025-Dec-22 01:26:08.901643 ERROR: failed to build: failed to solve: process "/bin/bash -ol pipefail -c npm run build" did not complete successfully: exit code: 1
+2025-Dec-22 01:26:08.901643 exit status 1
+2025-Dec-22 01:26:08.908950 Error type: RuntimeException
+2025-Dec-22 01:26:08.922539 Error code: 0
+2025-Dec-22 01:26:08.935797 Location: /var/www/html/app/Traits/ExecuteRemoteCommand.php:237
+2025-Dec-22 01:26:08.944866 Stack trace (first 5 lines):
+2025-Dec-22 01:26:08.952295 #0 /var/www/html/app/Traits/ExecuteRemoteCommand.php(104): App\Jobs\ApplicationDeploymentJob->executeCommandWithProcess()
+2025-Dec-22 01:26:08.959852 #1 /var/www/html/vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php(271): App\Jobs\ApplicationDeploymentJob->{closure:App\Traits\ExecuteRemoteCommand::execute_remote_command():71}()
+2025-Dec-22 01:26:08.966994 #2 /var/www/html/app/Traits/ExecuteRemoteCommand.php(71): Illuminate\Support\Collection->each()
+2025-Dec-22 01:26:08.975448 #3 /var/www/html/app/Jobs/ApplicationDeploymentJob.php(3086): App\Jobs\ApplicationDeploymentJob->execute_remote_command()
+2025-Dec-22 01:26:08.982718 #4 /var/www/html/app/Jobs/ApplicationDeploymentJob.php(872): App\Jobs\ApplicationDeploymentJob->build_image()
+2025-Dec-22 01:26:08.989876 ========================================
+2025-Dec-22 01:26:08.998327 Deployment failed. Removing the new version of your application.
+2025-Dec-22 01:26:09.484295 Gracefully shutting down build container: mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:26:09.806968 [CMD]: docker stop -t 30 mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:26:09.806968 mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:26:09.971942 [CMD]: docker rm -f mwokwkcs4kwc4wcsk488gso8
+2025-Dec-22 01:26:09.971942 Error response from daemon: No such container: mwokwkcs4kwc4wcsk488gso8
