@@ -100,40 +100,42 @@ export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
           )}
         </div>
 
-        <div className="flex flex-col gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="flex flex-col gap-0.5">
           {client.whatsapp && (
             <button
               onClick={openWhatsApp}
-              className="p-1 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded transition-colors cursor-pointer"
+              className="p-1.5 text-white bg-green-500 hover:bg-green-600 rounded-full shadow-sm transition-all cursor-pointer"
               title="Abrir WhatsApp"
             >
-              <MessageCircle className="w-3 h-3" />
+              <MessageCircle className="w-4 h-4" />
             </button>
           )}
-          {onEdit && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                onEdit(client)
-              }}
-              className="p-1 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors cursor-pointer"
-              title="Editar"
-            >
-              <Pencil className="w-3 h-3" />
-            </button>
-          )}
-          {onDelete && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                onDelete(String(client.id))
-              }}
-              className="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors cursor-pointer"
-              title="Deletar"
-            >
-              <Trash2 className="w-3 h-3" />
-            </button>
-          )}
+          <div className="flex flex-col gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+            {onEdit && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onEdit(client)
+                }}
+                className="p-1 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors cursor-pointer"
+                title="Editar"
+              >
+                <Pencil className="w-3 h-3" />
+              </button>
+            )}
+            {onDelete && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onDelete(String(client.id))
+                }}
+                className="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors cursor-pointer"
+                title="Deletar"
+              >
+                <Trash2 className="w-3 h-3" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>
