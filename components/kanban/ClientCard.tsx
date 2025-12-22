@@ -42,6 +42,16 @@ export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
     return `${day}/${month}/${year} às ${hours}:${minutes}`
   }
 
+  const openWhatsApp = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (!client.whatsapp) return
+    
+    // Remover caracteres especiais do número
+    const number = client.whatsapp.replace(/\D/g, '')
+    const url = `https://wa.me/55${number}`
+    window.open(url, '_blank')
+  }
+
   return (
     <div
       ref={setNodeRef}
