@@ -7,7 +7,7 @@
 
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Mail, Phone, Building2, Trash2, Pencil, Clock } from 'lucide-react'
+import { Mail, Phone, Building2, Trash2, Pencil, Clock, MessageCircle } from 'lucide-react'
 import { Client } from '@/types/client'
 
 interface ClientCardProps {
@@ -91,6 +91,15 @@ export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
         </div>
 
         <div className="flex flex-col gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+          {client.whatsapp && (
+            <button
+              onClick={openWhatsApp}
+              className="p-1 text-gray-400 hover:text-green-600 hover:bg-green-50 rounded transition-colors cursor-pointer"
+              title="Abrir WhatsApp"
+            >
+              <MessageCircle className="w-3 h-3" />
+            </button>
+          )}
           {onEdit && (
             <button
               onClick={(e) => {
