@@ -22,6 +22,7 @@ export function EditClientModal({ client, isOpen, onClose, onSave }: EditClientM
     email: '',
     whatsapp: '',
     notes: '',
+    qualify: false,
   })
 
   useEffect(() => {
@@ -31,6 +32,7 @@ export function EditClientModal({ client, isOpen, onClose, onSave }: EditClientM
         email: client.email || '',
         whatsapp: client.whatsapp || '',
         notes: client.notes || '',
+        qualify: client.qualify || false,
       })
     }
   }, [client])
@@ -39,7 +41,14 @@ export function EditClientModal({ client, isOpen, onClose, onSave }: EditClientM
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onSave(client.id, formData)
+    
+    // Se marcar como qualificado e não estiver no status QUALIFICADO, mudar automaticamente
+    const dataToSave: Partial<Client> = { ...formData }
+    if (formData.qualify && client.status !== 'QUALIFICADO') {
+      dataToSave.status = 'QUALIFICADO'
+    }
+    
+    onSave(client.id, dataToSave)
     onClose()
   }
 
@@ -108,6 +117,19 @@ export function EditClientModal({ client, isOpen, onClose, onSave }: EditClientM
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none resize-none text-gray-900"
               placeholder="Anotações sobre o cliente..."
             />
+          </div>
+
+          <div className="flex items-center gap-2 p-3 bg-emerald-50 border border-emerald-200 rounded-md">
+            <input
+              type="checkbox"
+              id="qualify"
+              checked={formData.qualify}
+              onChange={(e) => setFormData({ ...formData, qualify: e.target.checked })}
+              className="w-4 h-4 text-emerald-600 bg-white border-gray-300 rounded focus:ring-emerald-500 cursor-pointer"
+            />
+            <label htmlFor="qualify" className="text-sm font-medium text-emerald-700 cursor-pointer">
+              Lead Qualificado (moverá automaticamente para coluna Qualificado)
+            </label>
           </div>
 
           <div className="flex gap-3 pt-4">
