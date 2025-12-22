@@ -14,7 +14,9 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  DragOverEvent,
 } from '@dnd-kit/core'
+import { arrayMove } from '@dnd-kit/sortable'
 import { KanbanColumn } from './KanbanColumn'
 import { ClientCard } from './ClientCard'
 import { EditClientModal } from './EditClientModal'
@@ -115,39 +117,67 @@ export function KanbanBoard() {
 
     if (!over) return
 
-    const clientId = Number(active.id)
-    const newStatus = over.id as ClientStatus
+    const activeId = Number(active.id)
+    const overId = over.id
 
-    const client = clients.find((c) => c.id === clientId)
-    if (!client || client.status === newStatus) return
+    const activeClient = clients.find((c) => c.id === activeId)
+    if (!activeClient) return
 
-    setClients((prev) =>
-      prev.map((c) =>
-        c.id === clientId ? { ...c, status: newStatus } : c
-      )
-    )
+    // Verificar se soltou sobre outro card ou sobre uma coluna
+    const overClient = clients.find((c) => String(c.id) === overId)
+    const newStatus = overClient ? overClient.status : (overId as ClientStatus)
 
-    try {
-      const response = await fetch(`/api/clients/${clientId}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ status: newStatus }),
-      })
+    // Se não mudou de status nem de posição, não fazer nada
+    if (activeClient.status === newStatus && String(activeId) === overId) return
 
-      if (!response.ok) {
+    // Reordenar cards
+    setClients((prev) => {
+      const oldIndex = prev.findIndex((c) => c.id === activeId)
+      let newIndex = prev.findIndex((c) => String(c.id) === overId)
+
+      // Se soltou sobre uma coluna (não sobre um card), colocar no final
+      if (newIndex === -1) {
+        const sameStatusClients = prev.filter((c) => c.status === newStatus)
+        newIndex = prev.findIndex((c) => c.id === sameStatusClients[sameStatusClients.length - 1]?.id)
+        if (newIndex === -1) newIndex = prev.length - 1
+      }
+
+      // Atualizar status se mudou de coluna
+      let newClients = [...prev]
+      if (activeClient.status !== newStatus) {
+        newClients = newClients.map((c) =>
+          c.id === activeId ? { ...c, status: newStatus } : c
+        )
+      }
+
+      // Reordenar
+      return arrayMove(newClients, oldIndex, newIndex)
+    })
+
+    // Atualizar no backend apenas se mudou de status
+    if (activeClient.status !== newStatus) {
+      try {
+        const response = await fetch(`/api/clients/${activeId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus }),
+        })
+
+        if (!response.ok) {
+          setClients((prev) =>
+            prev.map((c) =>
+              c.id === activeId ? { ...c, status: activeClient.status } : c
+            )
+          )
+        }
+      } catch (error) {
+        console.error('Erro ao atualizar status:', error)
         setClients((prev) =>
           prev.map((c) =>
-            c.id === clientId ? { ...c, status: client.status } : c
+            c.id === activeId ? { ...c, status: activeClient.status } : c
           )
         )
       }
-    } catch (error) {
-      console.error('Erro ao atualizar status:', error)
-      setClients((prev) =>
-        prev.map((c) =>
-          c.id === clientId ? { ...c, status: client.status } : c
-        )
-      )
     }
   }
 
