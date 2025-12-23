@@ -97,6 +97,8 @@ export function KanbanBoard() {
       const response = await fetch('/api/clients')
       if (response.ok) {
         const data = await response.json()
+        console.log('🔍 DEBUG: Dados da API:', data.slice(0, 3))
+        console.log('🔍 DEBUG: Cascivone?', data.find((c: any) => c.name === 'Cascivone'))
         setClients(data)
       }
     } catch (error) {
