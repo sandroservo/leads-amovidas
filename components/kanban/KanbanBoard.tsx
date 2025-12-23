@@ -67,14 +67,23 @@ export function KanbanBoard() {
         },
         (payload) => {
           console.log('Mudança detectada:', payload)
+          console.log('🔍 DEBUG: previous_status no payload:', (payload.new as any)?.previous_status)
 
           if (payload.eventType === 'INSERT') {
             setClients((prev) => [...prev, payload.new as Client])
           } else if (payload.eventType === 'UPDATE') {
             setClients((prev) =>
-              prev.map((c) =>
-                c.id === (payload.new as Client).id ? (payload.new as Client) : c
-              )
+              prev.map((c) => {
+                if (c.id === (payload.new as Client).id) {
+                  // Preservar previous_status se não vier no payload
+                  const newData = payload.new as Client
+                  return {
+                    ...newData,
+                    previous_status: newData.previous_status || c.previous_status
+                  }
+                }
+                return c
+              })
             )
           } else if (payload.eventType === 'DELETE') {
             setClients((prev) =>
