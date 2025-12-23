@@ -29,6 +29,15 @@ export const CLIENT_STATUS_COLORS: Record<ClientStatus, string> = {
   PERDIDO: 'border-slate-500 bg-slate-50',
 }
 
+export const CLIENT_STATUS_TEXT_COLORS: Record<ClientStatus, string> = {
+  NOVO: 'text-blue-700',
+  CONTATO_INICIAL: 'text-amber-700',
+  QUALIFICADO: 'text-pink-700',
+  NEGOCIACAO: 'text-purple-700',
+  GANHO: 'text-green-700',
+  PERDIDO: 'text-slate-700',
+}
+
 export interface Client {
   id: number
   whatsapp: string | null

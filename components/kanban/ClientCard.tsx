@@ -8,7 +8,7 @@
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { Mail, Phone, Building2, Trash2, Pencil, Clock, MessageCircle, ArrowRight } from 'lucide-react'
-import { Client, CLIENT_STATUS_LABELS } from '@/types/client'
+import { Client, CLIENT_STATUS_LABELS, CLIENT_STATUS_COLORS, CLIENT_STATUS_TEXT_COLORS } from '@/types/client'
 
 interface ClientCardProps {
   client: Client
@@ -92,20 +92,13 @@ export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
             </div>
           )}
 
-          <div className="mt-2 flex flex-wrap gap-1">
-            {client.qualify && (
-              <div className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-emerald-50 text-emerald-700 text-[10px] font-medium rounded border border-emerald-200">
-                <Building2 className="w-2.5 h-2.5" />
-                <span>Qualificado</span>
-              </div>
-            )}
-            {client.previous_status && client.previous_status !== client.status && (
-              <div className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-medium rounded border border-blue-200">
-                <ArrowRight className="w-2.5 h-2.5" />
-                <span>Para: {CLIENT_STATUS_LABELS[client.status]}</span>
-              </div>
-            )}
-          </div>
+          {(client.previous_status && client.previous_status !== client.status) && (
+            <div className={`mt-2 inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-medium rounded border ${CLIENT_STATUS_COLORS[client.status]} ${CLIENT_STATUS_TEXT_COLORS[client.status]}`}>
+              <ArrowRight className="w-2.5 h-2.5" />
+              <span>Para: {CLIENT_STATUS_LABELS[client.status]}</span>
+              {client.qualify && <Building2 className="w-2.5 h-2.5 ml-0.5" />}
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col gap-0.5">
