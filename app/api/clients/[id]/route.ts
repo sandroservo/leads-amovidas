@@ -19,6 +19,10 @@ export async function PATCH(
     const clientId = parseInt(id, 10)
     const body = await request.json()
 
+    console.log('🔍 API PATCH - ID:', clientId)
+    console.log('🔍 API PATCH - Body:', body)
+    console.log('🔍 API PATCH - previous_status:', body.previous_status)
+
     if (isNaN(clientId)) {
       return NextResponse.json(
         { error: 'ID inválido' },
@@ -34,6 +38,8 @@ export async function PATCH(
       .single()
 
     if (error) throw error
+
+    console.log('✅ API PATCH - Resultado:', data)
 
     return NextResponse.json(data)
   } catch (error) {
