@@ -17,6 +17,11 @@ interface ClientCardProps {
 }
 
 export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
+  // DEBUG: Log para verificar previous_status
+  if (client.previous_status) {
+    console.log(`Cliente ${client.name || client.id}: previous_status =`, client.previous_status)
+  }
+
   const {
     attributes,
     listeners,
