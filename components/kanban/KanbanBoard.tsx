@@ -67,7 +67,6 @@ export function KanbanBoard() {
         },
         (payload) => {
           console.log('Mudança detectada:', payload)
-          console.log('🔍 DEBUG: previous_status no payload:', (payload.new as any)?.previous_status)
 
           if (payload.eventType === 'INSERT') {
             setClients((prev) => [...prev, payload.new as Client])
@@ -106,8 +105,6 @@ export function KanbanBoard() {
       const response = await fetch('/api/clients')
       if (response.ok) {
         const data = await response.json()
-        console.log('🔍 DEBUG: Dados da API:', data.slice(0, 3))
-        console.log('🔍 DEBUG: Cascivone?', data.find((c: any) => c.name === 'Cascivone'))
         setClients(data)
       }
     } catch (error) {

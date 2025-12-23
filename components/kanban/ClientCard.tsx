@@ -17,11 +17,6 @@ interface ClientCardProps {
 }
 
 export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
-  // DEBUG: Log para verificar previous_status
-  if (client.previous_status) {
-    console.log(`Cliente ${client.name || client.id}: previous_status =`, client.previous_status)
-  }
-
   const {
     attributes,
     listeners,
@@ -104,7 +99,7 @@ export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
                 <span>Qualificado</span>
               </div>
             )}
-            {client.previous_status && (
+            {client.previous_status && client.previous_status !== client.status && (
               <div className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-medium rounded border border-blue-200">
                 <ArrowRight className="w-2.5 h-2.5" />
                 <span>Para: {CLIENT_STATUS_LABELS[client.status]}</span>
