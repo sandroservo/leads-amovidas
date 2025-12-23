@@ -95,7 +95,7 @@ export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
           {(client.previous_status && client.previous_status !== client.status) && (
             <div className={`mt-2 inline-flex items-center gap-1 px-1.5 py-0.5 text-[10px] font-medium rounded border ${CLIENT_STATUS_COLORS[client.status]} ${CLIENT_STATUS_TEXT_COLORS[client.status]}`}>
               <ArrowRight className="w-2.5 h-2.5" />
-              <span>Para: {CLIENT_STATUS_LABELS[client.status]}</span>
+              <span>{CLIENT_STATUS_LABELS[client.status]}</span>
               {client.qualify && <Building2 className="w-2.5 h-2.5 ml-0.5" />}
             </div>
           )}
