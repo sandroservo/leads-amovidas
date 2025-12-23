@@ -107,7 +107,7 @@ export function ClientCard({ client, onEdit, onDelete }: ClientCardProps) {
             {client.previous_status && (
               <div className="inline-flex items-center gap-1 px-1.5 py-0.5 bg-blue-50 text-blue-700 text-[10px] font-medium rounded border border-blue-200">
                 <ArrowRight className="w-2.5 h-2.5" />
-                <span>De: {CLIENT_STATUS_LABELS[client.previous_status]}</span>
+                <span>Para: {CLIENT_STATUS_LABELS[client.status]}</span>
               </div>
             )}
           </div>
