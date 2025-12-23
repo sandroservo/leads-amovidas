@@ -146,7 +146,7 @@ export function KanbanBoard() {
       let newClients = [...prev]
       if (activeClient.status !== newStatus) {
         newClients = newClients.map((c) =>
-          c.id === activeId ? { ...c, status: newStatus } : c
+          c.id === activeId ? { ...c, status: newStatus, previous_status: activeClient.status } : c
         )
       }
 
@@ -160,7 +160,7 @@ export function KanbanBoard() {
         const response = await fetch(`/api/clients/${activeId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ status: newStatus }),
+          body: JSON.stringify({ status: newStatus, previous_status: activeClient.status }),
         })
 
         if (!response.ok) {

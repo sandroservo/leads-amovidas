@@ -37,5 +37,6 @@ export interface Client {
   notes: string | null
   qualify: boolean | null
   status: ClientStatus
+  previous_status: ClientStatus | null
   created_at: Date
 }
