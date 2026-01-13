@@ -10,6 +10,7 @@ export type ClientStatus =
   | 'NEGOCIACAO'
   | 'GANHO'
   | 'PERDIDO'
+  | 'LEADS_FRIOS'
 
 export const CLIENT_STATUS_LABELS: Record<ClientStatus, string> = {
   NOVO: 'Novo',
@@ -18,6 +19,7 @@ export const CLIENT_STATUS_LABELS: Record<ClientStatus, string> = {
   NEGOCIACAO: 'Negociação',
   GANHO: 'Ganho',
   PERDIDO: 'Perdido',
+  LEADS_FRIOS: 'Leads Frios',
 }
 
 export const CLIENT_STATUS_COLORS: Record<ClientStatus, string> = {
@@ -27,6 +29,7 @@ export const CLIENT_STATUS_COLORS: Record<ClientStatus, string> = {
   NEGOCIACAO: 'border-purple-500 bg-purple-50',
   GANHO: 'border-green-500 bg-green-50',
   PERDIDO: 'border-slate-500 bg-slate-50',
+  LEADS_FRIOS: 'border-cyan-500 bg-cyan-50',
 }
 
 export const CLIENT_STATUS_TEXT_COLORS: Record<ClientStatus, string> = {
@@ -36,6 +39,7 @@ export const CLIENT_STATUS_TEXT_COLORS: Record<ClientStatus, string> = {
   NEGOCIACAO: 'text-purple-700',
   GANHO: 'text-green-700',
   PERDIDO: 'text-slate-700',
+  LEADS_FRIOS: 'text-cyan-700',
 }
 
 export interface Client {

@@ -35,6 +35,7 @@ const STATUSES: ClientStatus[] = [
   'NEGOCIACAO',
   'GANHO',
   'PERDIDO',
+  'LEADS_FRIOS',
 ]
 
 export function KanbanBoard() {
@@ -251,7 +252,7 @@ export function KanbanBoard() {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
-      <div className="grid grid-cols-6 gap-3 h-full">
+      <div className="grid grid-cols-7 gap-3 h-full">
         {STATUSES.map((status) => (
           <KanbanColumn
             key={status}
